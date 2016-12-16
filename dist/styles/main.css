@@ -1,0 +1,9 @@
+div {
+  height: 100px;
+  width: 100px;
+  background: red;
+}
+
+div > p {
+  line-height: 30px;
+}

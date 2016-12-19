@@ -30,6 +30,11 @@ gulp.task('copyIndex', function() {
 	.pipe(plugins.plumber())
 	.pipe(gulp.dest('dist'))
 })
+gulp.task('copyTemplates', function() {
+	return gulp.src("app/templates/**/*.html")
+	.pipe(plugins.plumber())
+	.pipe(gulp.dest("dist/templates"))
+})
 gulp.task('concat', function() {
 	return gulp.src(paths.jsLibs)
 	.pipe(plugins.plumber())
@@ -40,6 +45,10 @@ gulp.task('sass-deploy', function() {
 	return gulp.src(paths.stylesMain)
 	.pipe(plugins.plumber())
 	.pipe(plugins.sass({outputStyle: 'expanded'}))
+ 	.pipe(plugins.autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+	}))
 	.pipe(gulp.dest(paths.distStyle));
 })
 gulp.task('coffee-deploy', function() {
@@ -49,6 +58,7 @@ gulp.task('coffee-deploy', function() {
 	.pipe(plugins.concat('main.js'))
 	.pipe(gulp.dest(paths.distScript));
 })
+
 gulp.task('webserver', function() {
 	return gulp.src('dist')
 	.pipe(plugins.webserver({
@@ -59,6 +69,7 @@ gulp.task('webserver', function() {
 })
 gulp.task('watch', function() {
 	gulp.watch('app/index.html', ['copyIndex']);
+	gulp.watch('app/templates/**/*.html', ['copyTemplates']);
 	gulp.watch(paths.stylesMain, ['sass-deploy']);
 	gulp.watch(paths.scriptsMain, ['coffee-deploy']);
 	gulp.watch(['app/index.html', 'app/styles/*.scss', 'app/scripts/**/*.coffee'])
@@ -68,6 +79,7 @@ gulp.task('watch', function() {
 gulp.task('default', [
 		'copyFile',
 		'copyIndex',
+		'copyTemplates',
 		'concat',
 		'sass-deploy',
 		'coffee-deploy',

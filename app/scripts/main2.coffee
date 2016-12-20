@@ -9,7 +9,7 @@ myBottomShow = () ->
 		"<div class='bottom'>
 			<p>" + data.author + " " + data.name + "</p><p>" + data.desc + " " + data.time + "</p>
 		</div>"
-		domBottom.appendTo('body')
+		$('body').append(domBottom)
 	return {
 		show: show
 	}

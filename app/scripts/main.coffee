@@ -25,7 +25,7 @@ myApp.directive('myDirective', () ->
 					elem.find('.slides:first').animate(
 						marginLeft: '-500'
 					,1000, () -> 
-							elem.find('.slides:first').appendTo(slideWrap)
+							elem.find('.slides:first').css('marginLeft',0).appendTo(slideWrap)
 					)
 				run = (speed) -> 
 						window.setInterval(move, speed)

@@ -38,7 +38,7 @@
           return elem.find('.slides:first').animate({
             marginLeft: '-500'
           }, 1000, function() {
-            return elem.find('.slides:first').appendTo(slideWrap);
+            return elem.find('.slides:first').css('marginLeft', 0).appendTo(slideWrap);
           });
         };
         run = function(speed) {
@@ -65,7 +65,7 @@
     show = function() {
       var domBottom;
       domBottom = "<div class='bottom'> <p>" + data.author + " " + data.name + "</p><p>" + data.desc + " " + data.time + "</p> </div>";
-      return $(domBottom).appendTo('body');
+      return $('body').append(domBottom);
     };
     return {
       show: show
